@@ -1,1 +1,2 @@
+nmap -sC -sV -oN basicpentest_nmap.txt [TARGET_IP]
 
