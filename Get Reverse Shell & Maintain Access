@@ -1,1 +1,11 @@
+After gaining shell:
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+Upgrade shell if needed:
+export TERM=xterm
+Run system checks:
+whoami
+id
+uname -a
+Look for flag (commonly in /home or /root):
+cat /home/*/flag.txt
 
