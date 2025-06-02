@@ -1,1 +1,10 @@
-
+If port 80 is open:
+firefox http://[TARGET_IP]
+Use nikto for web vulnerability scan:
+nikto -h http://[TARGET_IP]
+If SMB is open (port 445), use enum4linux:
+enum4linux -a [TARGET_IP]
+If FTP/SSH login exists, brute-force with hydra:
+hydra -l [username] -P /usr/share/wordlists/rockyou.txt [TARGET_IP] ssh
+or for FTP:
+hydra -l [username] -P /usr/share/wordlists/rockyou.txt ftp://[TARGET_IP]
